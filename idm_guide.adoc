@@ -1,0 +1,30 @@
+Identity Management Consulting Field Guide
+==========================================
+Jason Ritenour <jritenou@redhat.com>
+description: A how to guide for scoping & delivering an IdM enagement
+:stylesheet: asciidoc.css
+:imagesdir: images
+
+//Intro - IdM Components
+:leveloffset: 0
+include::./header.adoc[]
+
+//Intro - IdM Components
+:leveloffset: 1
+include::./intro.adoc[]
+
+//Scoping & Design
+:leveloffset: 1
+include::./scope.adoc[]
+
+//Install & Configure
+:leveloffset: 1
+include::./installconfig.adoc[]
+
+//Integration
+:leveloffset: 1
+include::./integration.adoc[]
+
+//Troubleshooting
+:leveloffset: 1
+include::./troubleshooting.adoc[]

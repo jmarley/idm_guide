@@ -1,0 +1,50 @@
+== Guide Outline
+
+== Architecture
+* DNS
+** Internal
+** External (AD, Infoblox, BIND, etc)
+*** GSS
+*** TSIG
+* PKI
+** Root CA or subordinate?
+* Replication flow
+
+
+== Installation (Do I know this?)
+* Scope
+** Architecture
+** DNS
+** LDAP
+** PKI
+*** External
+** Trust
+*** Conf
+** Kerberos
+*** Conf
+** NTP
+
+== Config
+* SUDO
+* Automount
+* HBAC
+
+* 2FA
+** Smartcard/CAC
+** OTP
+
+* Migration
+** LDIF
+
+== Ingegration
+
+* External Auth
+** HTTP
+** Satellite
+** CFME
+
+== Troubleshooting
+
+* Common mistakes & misconceptions
+* Known issues
+* Common

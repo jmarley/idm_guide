@@ -1,0 +1,57 @@
+= Scoping & Design
+
+== Scoping Questions
+
+=== IdM Specific - Current Customer Environment
+* Do you have an existing directory service?  Will IdM be integrating with this or replacing it?
+
+** Do you currently have a Microsoft Active Directory (AD) server in place?
+
+** If so, is there a requirement to integrate with the existing AD infrastructure?
+
+* Do you have an existing DNS service?  Will IdM be integrating with this or replacing it?
+
+** Will DNS be delegated to IdM for specific domains?
+
+* Do you have an existing certificate authority/private key infrastructure?  Will IdM be integrating with this or replacing it?
+
+=== IdM Specific - Workload and Configuration
+* How many users/hosts will be joined to IdM?
+
+* How many sites will IdM be servicing? - Note: to keep this question simple, let’s agree that a “site” is anything separated by a WAN link.
+
+* How do you plan to authenticate to IdM?
+** LDAP
+
+** Kerberos
+
+** SSSD
+
+** HTTP/SAML
+
+** User certificates
+
+* Do you need to import/re-create any local user accounts from existing systems?
+
+* What client operating systems/versions will need to authenticate to IdM?
+
+* What Red Hat products will use IdM for authentication?
+** CloudForms
+
+** RHEV
+
+** Satellite
+
+** OpenStack
+
+** OpenShift
+
+* What non-Red Hat productions will use IdM for authentication?
+
+* IdM provides the ability for clients to supplement the local sudo configurations with information stored and maintained within the directory server. Do you currently control local sudoers file?
+
+* If so, have you identified the services users can have access to through the sudo command?
+
+* What are your current Security Policy requirements around password length, complexity, aging, login failure attempts, and auditing?
+
+* IdM can control access to both machines and services running on those machines.  Are there any requirements to allow/deny access to certain machines for a particular service? Example would be no ssh to a particular machine for the users group but allowed for the unix_admin group.
