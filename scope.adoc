@@ -1,8 +1,23 @@
 = Scoping & Design
 
+== Approach to Scoping
+
+IdM can be either very simple or extremely difficult to implement depending on the specifics of the customer's
+use case.  Therefore, it is absolutely essential to properly scope the deployment.  To properly scope the engagement,
+you need to be aware of the following:
+
+* Why does the customer want to use IdM? (basic LDAP enabled directory, migration from another directory service, back end authentication source for an app, etc.)
+* Will IdM need to interface with Active Directory in any way?
+* Where will IdM's infrastructure components (DNS, PKI, NTP) fit into their current infrastructure?
+* Will they be using any advanced forms of authentication, such as Smart Cards or OTP?
+* How many hosts & users?
+* Are they planning to leverage HBAC/sudo/selinux rules in IdM?
+
+This is just a high level sample, but getting the answers to questions such as these can mean the difference between a two or six week engagement.
+
 == Scoping Questions
 
-=== IdM Specific - Current Customer Environment
+=== Current Customer Environment
 * Do you have an existing directory service?  Will IdM be integrating with this or replacing it?
 
 ** Do you currently have a Microsoft Active Directory (AD) server in place?
@@ -15,7 +30,12 @@
 
 * Do you have an existing certificate authority/private key infrastructure?  Will IdM be integrating with this or replacing it?
 
-=== IdM Specific - Workload and Configuration
+* Do you have a RHEL 7 baseline/is RHEL 7 approved for usage in your environment?
+
+NOTE: IdM is indeed present in RHEL 6, it is based on the older 3.x version of FreeIPA.  There will likely be no major additions to this version,
+and new features such as smart card auth & OTP will likely never be added to it.
+
+=== Workload and Configuration
 * How many users/hosts will be joined to IdM?
 
 * How many sites will IdM be servicing? - Note: to keep this question simple, let’s agree that a “site” is anything separated by a WAN link.
@@ -36,6 +56,7 @@
 * What client operating systems/versions will need to authenticate to IdM?
 
 * What Red Hat products will use IdM for authentication?
+
 ** CloudForms
 
 ** RHEV
@@ -55,3 +76,55 @@
 * What are your current Security Policy requirements around password length, complexity, aging, login failure attempts, and auditing?
 
 * IdM can control access to both machines and services running on those machines.  Are there any requirements to allow/deny access to certain machines for a particular service? Example would be no ssh to a particular machine for the users group but allowed for the unix_admin group.
+
+== Planning Approach
+
+Once you have a better idea of what the customer wants, you can start planning the deployment.  A few things to keep in mind right from the beginning:
+
+* Less is more - a single IdM instance can typically serve ~2500-3000 clients without issue
+* That said, you sould always go with two at a minimum, for availability purposes
+* Things are much smoother if you can get the Client to configure DNS zones/delegations and such ahead of time
+* 
+
+==  Sample IdM SOW For "Base Configuration" (Two Week Engagement)
+NOTE: The basis for this SOW began with the one the IdM SME community came up with at https://mojo.redhat.com/docs/DOC-1046014. Has been adapted & expanded upon based one what clients typically ask for in my experience with the public sector.  YMMV.
+
+=== Scope
+
+* Install two (2 IdM Servers in one location)
+* Only RHEL 6/7 Clients will be joined
+* Create sample HBAC/sudo/automount rules
+* Configure one (1) form of multifactor authentication
+* Configure one (1) currently deployed Red Hat application (ie Satellite, CloudForms, OpenStack) to perform LDAP authentication using IdM as the provider
+* Integration with AD is out of scope
+* Integration with existing DNS/NTP/CA services, provided Client team is available & able to quickly turn around requests for integration (ie signing CSRs, creating/delegating DNS zones)
+
+=== SOW Task list
+
+* Assist Client in planning a Red Hat Identity Management (IdM) Topology consisting of:
+** Two (2) IdM servers.
+** Design drawing depicting physical & logical location of servers in relation to clients and other infrastructure components
+** Capacity planning aligned to expected grow and feature usage
+
+* Assist Client in the deployment of the following:
+** Two (2) IdM servers
+** Installation & configuration of RHEL on the IdM hosts
+** Subscribing systems to the approriate RHN/Satellite channels
+** IdM package installation and requirements including DNS guidance.
+** LDAP authorization and authentication policies.
+** Configure and review example sudo, automount and HBAC configurations, with validation against a single RHEL6 and/or a single RHEL7 client.
+** Configure and review mult-factor authentication, with validation against a single user signing on to a single host.
+
+* Review with the Client general operations and maintenance procedures for IdM including:
+** LDAP backup and restore procedures.
+** Monitoring and troubleshooting
+*** Demonstration of dbmon.sh (memory/cache utilization)
+*** Demonstration of logconv.pl (problems in the access log e.g. need indexes, misconfigured clients, etc.)
+*** Demonstration of replication monitoring and troubleshooting
+** Demonstrate registration client to IdM server for authentication, using either admin credentials or a pre-created host object's one time password.
+** General IdM maintenance and tuning (sysctl parameters, configuration replication aggreements, etc).
+** Creation of example users, groups, host groups, and password policies.
+** IdM configuration and customization.
+** IdM CLI usage and examples.
+** IdM Web Interface usage and examples.
+** Adding additional IdM hosts/decomming existing hosts
