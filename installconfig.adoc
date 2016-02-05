@@ -1,0 +1,51 @@
+= Installing & Configuring IdM
+
+== Installation
+
+=== Before You Get Started
+
+=== Preparing To Install
+
+=== The ipa-server-install Script
+
+==== DNS Setup During Install
+
+==== Self-Signed, External CA, or No CA
+
+==== Other Installation Paramembers
+
+=== Verifying Install
+
+=== Installing Addition IdM Servers
+
+== Configuration
+
+=== Tuning
+
+=== Replication Agreements
+
+=== SUDO rules
+
+=== HBAC
+
+=== Automount
+
+=== Certificate Profiles
+
+=== Multifactor Authentication
+
+
+** DNS
+** LDAP
+** PKI
+*** External
+** Trust
+*** Conf
+** Kerberos
+*** Conf
+** NTP
+
+== Config
+* SUDO
+* Automount
+* HBAC

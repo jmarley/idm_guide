@@ -1,0 +1,9 @@
+= Troubleshooting
+
+== Tools to Monitor IdM
+=== Understanding & consuming logs
+=== logconv.pl
+=== dbmon.sh
+=== Monitoring Replication
+== Common Setup Mistakes
+== Known Issues/Work Arounds

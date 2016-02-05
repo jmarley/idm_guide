@@ -7,7 +7,7 @@ use case.  Therefore, it is absolutely essential to properly scope the deploymen
 you need to be aware of the following:
 
 * Why does the customer want to use IdM? (basic LDAP enabled directory, migration from another directory service, back end authentication source for an app, etc.)
-* Will IdM need to interface with Active Directory in any way?
+* Will IdM need to interface with Active Directory in any way? If so, what specific functionality is required?
 * Where will IdM's infrastructure components (DNS, PKI, NTP) fit into their current infrastructure?
 * Will they be using any advanced forms of authentication, such as Smart Cards or OTP?
 * How many hosts & users?
@@ -84,7 +84,8 @@ Once you have a better idea of what the customer wants, you can start planning t
 * Less is more - a single IdM instance can typically serve ~2500-3000 clients without issue
 * That said, you sould always go with two at a minimum, for availability purposes
 * Things are much smoother if you can get the Client to configure DNS zones/delegations and such ahead of time
-* 
+* Joining under an existing trusted CA is a bit of a pain and slows the deployment down (generating CSR, submitting it, waiting for & integrating signed certificate) but if customer has existing CA in place, this is preferred.  It's also easier to do up front rather than change to a external CA from a self signed cert later on.
+* AD Trusts can be painful, more from a cultural than technical standpoint - Windows admins are usually leary of other directory services.
 
 ==  Sample IdM SOW For "Base Configuration" (Two Week Engagement)
 NOTE: The basis for this SOW began with the one the IdM SME community came up with at https://mojo.redhat.com/docs/DOC-1046014. Has been adapted & expanded upon based one what clients typically ask for in my experience with the public sector.  YMMV.
@@ -96,8 +97,9 @@ NOTE: The basis for this SOW began with the one the IdM SME community came up wi
 * Create sample HBAC/sudo/automount rules
 * Configure one (1) form of multifactor authentication
 * Configure one (1) currently deployed Red Hat application (ie Satellite, CloudForms, OpenStack) to perform LDAP authentication using IdM as the provider
-* Integration with AD is out of scope
+* Integration with AD is out of scope.  Add 1-2 weeks for that.
 * Integration with existing DNS/NTP/CA services, provided Client team is available & able to quickly turn around requests for integration (ie signing CSRs, creating/delegating DNS zones)
+* DNSSEC is not in scope.  If client insists add a week to timeline.
 
 === SOW Task list
 

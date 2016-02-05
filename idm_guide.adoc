@@ -3,7 +3,9 @@ Identity Management Consulting Field Guide
 Jason Ritenour <jritenou@redhat.com>
 description: A how to guide for scoping & delivering an IdM enagement
 :stylesheet: asciidoc.css
-:imagesdir: images
+:doctype: book
+:source-highlighter: coderay
+:listing-caption: Listing
 
 //Intro - IdM Components
 :leveloffset: 0

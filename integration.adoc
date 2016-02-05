@@ -1,0 +1,14 @@
+= Integration
+
+== Red Hat Products
+=== CloudForms
+=== Satellite 6
+=== OpenStack
+=== OpenShift
+
+== ActiveDirectory
+=== Via Trust
+=== Via Synchronization
+
+== Other
+=== HTTP
